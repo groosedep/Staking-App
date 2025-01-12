@@ -73,4 +73,13 @@ contract StakingApp is App, Initializable, IForwarder {
     ) public constant returns (bool) {
         return token.balanceOf(_sender) >= minDeposit;
     }
+
+    function forward(
+        bytes _script
+    ) public {
+        // TODO: Add pool transition transaction to script
+        // TODO: Are they staking for outcome A or B?
+        stake(sha3(_script), minDeposit);
+        runScript(_script);
+    }
 }
